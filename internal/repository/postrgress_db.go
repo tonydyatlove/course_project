@@ -19,7 +19,7 @@ type PRepository struct {
 }
 
 
-func (p *PRepository) CreateUser(ctx context.Context, person *model.Person) (string, error) {
+func (p *PRepository) CreateGame(ctx context.Context, person *model.Person) (string, error) {
 	newID := uuid.New().String()
 	if Game.Score < 0 || Game.Score > 20 {
 		return "", fmt.Errorf("database error with create game: age less then 0 or more then 20")
@@ -34,7 +34,7 @@ func (p *PRepository) CreateUser(ctx context.Context, person *model.Person) (str
 }
 
 
-func (p *PRepository) GetUserByID(ctx context.Context, idPerson string) (*model.Person, error) {
+func (p *PRepository) GetGameByID(ctx context.Context, idPerson string) (*model.Person, error) {
 	u := model.Person{}
 	err := p.Pool.QueryRow(ctx, "select id,teams,xG,score,mvp from persons where id=$1", idPerson).Scan(
 		&u.ID, &uTeams, &u.xG, &u.Score, &u.MVP)
